@@ -1,0 +1,12 @@
+{% load static %}
+
+<br>
+<div class="card text-bg-dark">
+    <img src="{% static 'reminders/images/' %}{{ weather_description }}.png" class="card-img" alt="{{ weather_description }}">
+    <div class="card-img-overlay">
+      <h3 class="card-title">{{city}}. Now:  {{temperature}}°С</h3>
+      <h5 class="card-title">Feels like {{feels_like}}°С, {{weather_description}}.</h5>
+      <p class="card-text"><small> Humidity {{humidity}}%. Highest: {{temp_max}}°С. Lowest: {{temp_min}}°С.</small></p>
+      <p class="card-text"><small>{{date}}</small></p>
+    </div>
+  </div>

@@ -1,0 +1,17 @@
+{% if reminder.status %}
+<form method="POST" action="{% url 'toggle-switch' reminder.id %}">
+    {% csrf_token %}
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheck{{ reminder.id }}" checked onchange="this.form.submit()">
+        <label class="form-check-label" for="flexSwitchCheck{{ reminder.id }}"></label>
+    </div>
+</form>
+{% else %}
+<form method="POST" action="{% url 'toggle-switch' reminder.id %}">
+    {% csrf_token %}
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheck{{ reminder.id }}" onchange="this.form.submit()">
+        <label class="form-check-label" for="flexSwitchCheck{{ reminder.id }}"></label>
+    </div>
+</form>
+{% endif %}

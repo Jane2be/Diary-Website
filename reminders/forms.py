@@ -3,19 +3,31 @@ from django.forms import ModelForm
 from .models import Reminder, Board
 
 class BoardForm(ModelForm):
+    COLORS = [
+        ('primary-subtle', 'Deep Blue'),
+        ('secondary-subtle', 'Grey'),
+        ('success-subtle', 'Green'),
+        ('danger-subtle', 'Red'),
+        ('warning', 'Gold'),
+        ('warning-subtle', 'Yellow'),
+        ('info', 'Blue'),
+        ('info-subtle', 'Light Blue'),
+        ('light', 'Light'),
+    ]
+
+    color = forms.ChoiceField(choices=COLORS, widget=forms.Select(attrs={'class': 'form-control'}))
     class Meta:
         model = Board
         #fields = "__all__"
         fields = ('name', 'color', 'people')
         labels = {
-            'name': "",
+            'name': "Board Name:",
             'color': "",
             'people': "",
         }
         widgets = {
-            'name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Venue Name'}),
-            'color': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Address'}),
-            'people': forms.SelectMultiple(attrs={'class':'form-control', 'placeholder':'Attendees'}),
+            'name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Board Name'}),
+            'people': forms.SelectMultiple(attrs={'class':'form-control', 'placeholder':'Assignees'}),
         }
 
 

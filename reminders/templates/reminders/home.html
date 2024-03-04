@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,9 +13,10 @@
       body {
         background-color: #101C2E;
         color: #5D8BFF;
-        margin-left: 20px;
-        margin-right: 20px;
+      }
 
+      .nav-link{
+        color: #C9DBFF;
       }
 
       h1 {
@@ -41,128 +44,133 @@
         color: #C9DBFF; 
       }
     </style>
+    
   </head>
+
   <body>
-
-    <div class="plus-icon-container">
-        <a href="{% url 'add-reminder'%}">
-        <i class="fas fa-plus-circle"></i></a>
-      </div>
-
-    <br/><br/>
-    <h1 class="lh-1">Good</h1>
-    <h1 class="lh-1">{{ message }}</h1>
-    <table class="table table-borderless">
-        <tr>
-            <td class="fs-2 lh-1 fw-lighter align-left" style="color: #C9DBFF;">
-                Today's {{weekday}}
-            </td>
-
-            <td class="fs-2 lh-1 fw-lighter align-right" style="color: #C9DBFF;" align="right">
-                75% Done
-            </td>
-
-        </tr>
-        <tr>
-            <td class="fs-6 lh-1 fw-lighter align-left" style="color: #C9DBFF;">
-                {{date}}
-            </td>
-
-            <td class="fs-6 lh-1 fw-lighter align-right" style="color: #C9DBFF;" align="right">
-                Completed tasks
-            </td>
-        </tr>
-    </table>
-
-    <table class="table table-borderless">
-        <tr>
-            <td class="fs-2 fw-lighter">
-                <a href="#" style="color: #5D8BFF; text-decoration: none;">{{tasks_num}} Tasks</a>
-            </td>
-
-            <td class="fs-2 fw-lighter" align="right">
-                <a href="#" style="color: #C9DBFF; text-decoration: none;" >Boards</a>
-            </td>
-        </tr>
-    </table>
-
-    <table class="table table-borderless" style="width: auto; margin-left: 20px;" >
-        <tr>
-            {% if 'Monday' in weekday %}
-            <td>
+    <div class="container text-center" style="margin-left: 10px; margin-right: 10px;">
+        <div class="row">
+            <div class="col">
+                {% include 'reminders/navbar.html' %}
+            </div>
+        </div>
+        <div class="row">
+          <div class="col text-start">
+            <h1 class="lh-1">Good</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-start">
+            <h1 class="lh-1">{{ message }}</h1>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col text-start">
+                <p class="fs-2 lh-1 fw-lighter align-left" style="color: #C9DBFF;">
+                    Today's {{weekday}}
+                </p>
+            </div>
+            <div class="col">
+                <p class="fs-2 lh-1 fw-lighter align-right" style="color: #C9DBFF;" align="right">
+                    {{done_percent}}% Done
+                </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text-start">
+                <p class="fs-6 lh-1 fw-lighter align-left" style="color: #C9DBFF;">
+                    {{date}} {{time}}
+                </p>
+            </div>
+            <div class="col">
+                <p class="fs-6 lh-1 fw-lighter align-right" style="color: #C9DBFF;" align="right">
+                    {{done_tasks}} Completed tasks
+                </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text-start">
+                <p class="fs-2 fw-lighter" style="color: #5D8BFF; text-decoration: none;">
+                    {{tasks_num}} Tasks
+                </p>
+            </div>
+            <div class="col text-end">
+                <a class="fs-2 fw-lighter" href="{% url 'all-boards'%}" style="color: #C9DBFF; text-decoration: none;" >Boards</a>
+            </div>
+          </div>
+          <div class="row row-cols-7">
+            <div class="col text-start">
+                {% if 'Monday' in weekday %}
                 <a class="btn" href="{% url 'home' %}?wd=Monday"><strong>Mon</strong></a>
-            </td>
-            {% else %}
-            <td class="fw-lighter">
-                <a class="btn" href="{% url 'home' %}?wd=Monday">Mon</a>
-            </td>
-            {% endif %}
-    
-            {% if 'Tuesday' in weekday %}
-            <td>
+                {% else %}
+                <a class="btn fw-lighter" href="{% url 'home' %}?wd=Monday">Mon</a>
+                {% endif %}
+            </div>
+            <div class="col text-center">
+                {% if 'Tuesday' in weekday %}
                 <a class="btn" href="{% url 'home' %}?wd=Tuesday"><strong>Tue</strong></a>
-            </td>
-            {% else %}
-            <td class="fw-lighter">
-                <a class="btn" href="{% url 'home' %}?wd=Tuesday">Tue</a>
-            </td>
-            {% endif %}
-    
-            {% if 'Wednesday' in weekday %}
-            <td>
+                {% else %}
+                <a class="btn fw-lighter" href="{% url 'home' %}?wd=Tuesday">Tue</a>
+                {% endif %}
+            </div>
+            <div class="col text-center">
+                {% if 'Wednesday' in weekday %}
                 <a class="btn" href="{% url 'home' %}?wd=Wednesday"><strong>Wed</strong></a>
-            </td>
-            {% else %}
-            <td class="fw-lighter">
-                <a class="btn" href="{% url 'home' %}?wd=Wednesday">Wed</a>
-            </td>
-            {% endif %}
-    
-            {% if 'Thursday' in weekday %}
-            <td>
+                {% else %}
+                <a class="btn fw-lighter" href="{% url 'home' %}?wd=Wednesday">Wed</a>
+                {% endif %}
+            </div>
+            <div class="col text-center">
+                {% if 'Thursday' in weekday %}
                 <a class="btn" href="{% url 'home' %}?wd=Thursday"><strong>Thu</strong></a>
-            </td>
-            {% else %}
-            <td class="fw-lighter">
-                <a class="btn" href="{% url 'home' %}?wd=Thursday">Thu</a>
-            </td>
-            {% endif %}
-    
-            {% if 'Friday' in weekday %}
-            <td>
+                {% else %}
+                <a class="btn fw-lighter" href="{% url 'home' %}?wd=Thursday">Thu</a>
+                {% endif %}
+              </div>
+              <div class="col text-center">
+                {% if 'Friday' in weekday %}
                 <a class="btn" href="{% url 'home' %}?wd=Friday"><strong>Fri</strong></a>
-            </td>
-            {% else %}
-            <td class="fw-lighter">
-                <a class="btn" href="{% url 'home' %}?wd=Friday">Fri</a>
-            </td>
-            {% endif %}
-    
-            {% if 'Saturday' in weekday %}
-            <td>
+                {% else %}
+                <a class="btn fw-lighter" href="{% url 'home' %}?wd=Friday">Fri</a>
+                {% endif %}
+              </div>
+              <div class="col text-center">
+                {% if 'Saturday' in weekday %}
                 <a class="btn" href="{% url 'home' %}?wd=Saturday"><strong>Sat</strong></a>
-            </td>
-            {% else %}
-            <td class="fw-lighter">
-                <a class="btn" href="{% url 'home' %}?wd=Saturday">Sat</a>
-            </td>
-            {% endif %}
-    
-            {% if 'Sunday' in weekday %}
-            <td>
+                {% else %}
+                <a class="btn fw-lighter" href="{% url 'home' %}?wd=Saturday">Sat</a>
+                {% endif %}
+              </div>
+              <div class="col text-end">
+                {% if 'Sunday' in weekday %}
                 <a class="btn" href="{% url 'home' %}?wd=Sunday"><strong>Sun</strong></a>
-            </td>
-            {% else %}
-            <td class="fw-lighter">
-                <a class="btn" href="{% url 'home' %}?wd=Sunday">Sun</a>
-            </td>
-            {% endif %}
-        </tr>
-    </table>
-    
-    <div id="reminder-list">
-        {% include 'reminders/reminder_list.html' %}
-    </div>
+                {% else %}
+                <a class="btn fw-lighter" href="{% url 'home' %}?wd=Sunday">Sun</a>
+                {% endif %}
+              </div>
+          </div>
+          <div class="row">
+            <div class="col text-start" id="reminder-list">
+                {% include 'reminders/reminder_list.html' %}
+            </div>
+          </div>
+      
+          <div class="row">
+            <div class="col text-start">
+  <a href="{% url 'add-reminder'%}" class="btn btn-outline-secondary btn-sm rounded-3" style="width: 100%;">Add</a>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col text-start" id="reminder-list">
+                {% include 'reminders/weather.html' %}
+            </div>
+          </div>
+
+</div>
+
+<br>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     

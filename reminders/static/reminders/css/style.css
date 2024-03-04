@@ -1,0 +1,31 @@
+
+body {
+    background-color: #101C2E;
+    color: #5D8BFF;
+    margin-left: 20px;
+  }
+
+  h1 {
+    font-size: 5em;
+  }
+
+  .table {
+    background-color: transparent !important;
+  }
+
+  td {
+    background-color: transparent !important;
+  }
+
+  .plus-icon-container {
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    right: 20px; /* Adjust the right position as needed */
+    cursor: pointer;
+    color: #C9DBFF;
+    font-size: 40px; /* Adjust the font size as needed */
+  }
+
+  .btn {
+    color: #C9DBFF; 
+  }

@@ -15,7 +15,7 @@
 
       }
         h1 {
-        font-size: 5em; /* You can adjust the size accordingly */
+        font-size: 3em; /* You can adjust the size accordingly */
       }
 
       .table {
@@ -26,26 +26,40 @@
     </style>
 </head>
   <body>
-
-
-    
     <div class="card bg-{{reminder.board.color}} mb-3 rounded-4">
         <div class="card-body">
-            <p class="card-text">{{reminder.board}}</p>
-          <h1 class="card-title">{{reminder}}</h1>
-            <p class="card-text text-body-secondary fs-8">Date</p>
+          <div class="container">
+            <div class="row">
+              <div class="col text-start">
+                <p class="card-text"><em>{{reminder.board}}</em></p>
+              </div>
+              <div class="col d-flex justify-content-end">
+                {% include 'reminders/switch.html' %}
+          </div>
+        </div>
+      </div>
+        <h1 class="card-title">{{reminder}}</h1>
+            <p class="card-text text-body-secondary fs-8">Date:</p>
+            {% if reminder.reminder_time == None %}
             <p class="card-text fs-5">{{reminder.date}}</p>
+            {% else %}
+            <p class="card-text fs-5">{{reminder.date}} - {{reminder.reminder_time | time:"H:i"}}</p>
+            {% endif %}
 <br/>
-            <p class="card-text text-body-secondary fs-8">Additional Description</p>
+            <p class="card-text text-body-secondary fs-8">Additional Description:</p>
             <p class="card-text fs-5">{{reminder.description}}</p>
 <br/>
-            <p class="card-text text-body-secondary fs-8">Created</p>
+            <p class="card-text text-body-secondary fs-8">Created:</p>
             <p class="card-text fs-5">{{reminder.created_date}}</p>
             <p class="card-text fs-5">{{reminder.created_by}}</p>
+
         </div>
       </div>
 
       <a href="{% url 'home'%}" class="btn btn-outline-secondary btn-sm rounded-3">Back</a>
+      <a href="{% url 'edit-reminder' reminder.id%}" class="btn btn-outline-secondary btn-sm rounded-3">Edit</a></td>
+      <a href="{% url 'delete-reminder' reminder.id%}" class="btn btn-outline-danger btn-sm rounded-3">Delete</a>
+      
 
 
 

@@ -7,6 +7,7 @@ class MyUser(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.EmailField('User Email')
+    city = models.CharField(max_length=30)
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
@@ -27,6 +28,7 @@ class Reminder(models.Model):
     reminder_time = models.TimeField('Time', blank=True, null=True)
     description = models.TextField(blank=True)
     assignee = models.ManyToManyField(MyUser, blank=True)
+    status = models.BooleanField('Status', default=False)
     created_date = datetime.now()
     created_by = User
     def __str__(self):
